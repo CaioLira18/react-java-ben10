@@ -1,0 +1,326 @@
+/* ============================================================
+   HEADER  —  Disney Fairies  —  Magical Edition
+   ============================================================ */
+
+   @import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap');
+
+   :root {
+     --fairy-teal:   #2ecfb4;
+     --fairy-teal2:  #0fa88a;
+     --fairy-gold:   #f5d87c;
+     --fairy-dark:   #05141a;
+     --fairy-white:  #f0fffe;
+     --glass:        rgba(255,255,255,0.05);
+     --glass-border: rgba(255,255,255,0.10);
+     --ease-out:     cubic-bezier(0.22, 1, 0.36, 1);
+     --font-display: 'Cinzel Decorative', serif;
+     --font-body:    'Lora', Georgia, serif;
+   }
+   
+   /* ── WRAPPER ── */
+   .hd {
+     position: fixed;
+     top: 0;
+     left: 0;
+     width: 100%;
+     z-index: 1000;
+     transition: background 0.45s var(--ease-out), box-shadow 0.45s, backdrop-filter 0.45s;
+     font-family: var(--font-body);
+   }
+   
+   /* Top glow line — visible when NOT scrolled */
+   .hd__top-line {
+     position: absolute;
+     top: 0;
+     left: 0;
+     right: 0;
+     height: 1px;
+     background: linear-gradient(to right, transparent 0%, var(--fairy-teal) 40%, var(--fairy-gold) 60%, transparent 100%);
+     opacity: 0;
+     transition: opacity 0.4s;
+   }
+   
+   .hd--scrolled .hd__top-line { opacity: 0.5; }
+   
+   /* Scrolled state */
+   .hd--scrolled {
+     background: rgba(5, 18, 24, 0.75);
+     backdrop-filter: blur(18px);
+     -webkit-backdrop-filter: blur(18px);
+     box-shadow:
+       0 1px 0 rgba(46, 207, 180, 0.12),
+       0 4px 24px rgba(0, 0, 0, 0.4);
+   }
+   
+   /* ── INNER ── */
+   .hd__inner {
+     display: flex;
+     align-items: center;
+     justify-content: space-between;
+     padding: 12px 48px;
+     max-width: 1600px;
+     margin: 0 auto;
+   }
+   
+   /* ── LOGO ── */
+   .hd__logo {
+     display: flex;
+     align-items: center;
+     text-decoration: none;
+     flex-shrink: 0;
+   }
+   
+   .hd__logo img {
+     width: 110px;
+     height: auto;
+     filter: drop-shadow(0 2px 8px rgba(0,0,0,0.6));
+     transition: transform 0.35s var(--ease-out), filter 0.35s;
+   }
+   
+   .hd__logo:hover img {
+     transform: scale(1.05);
+     filter: drop-shadow(0 4px 16px rgba(46,207,180,0.4));
+   }
+   
+   /* ── DESKTOP NAV ── */
+   .hd__nav {
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     gap: 4px;
+   }
+   
+   .hd__nav__container {
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     margin: 0 auto;
+   }
+   
+   .hd__link {
+     position: relative;
+     display: inline-flex;
+     flex-direction: column;
+     align-items: center;
+     gap: 4px;
+     padding: 8px 18px;
+     text-decoration: none;
+     font-family: var(--font-display);
+     font-size: 12px;
+     letter-spacing: 2px;
+     color: rgba(240,255,254,0.75);
+     border-radius: 100px;
+     transition: color 0.3s, background 0.3s;
+     overflow: hidden;
+   }
+   
+   .hd__link::before {
+     content: '';
+     position: absolute;
+     inset: 0;
+     border-radius: 100px;
+     background: rgba(46,207,180,0);
+     transition: background 0.3s;
+   }
+   
+   .hd__link:hover::before,
+   .hd__link--active::before {
+     background: rgba(46,207,180,0.12);
+   }
+   
+   .hd__link:hover,
+   .hd__link--active {
+     color: var(--fairy-teal);
+   }
+   
+   /* Animated underline dot */
+   .hd__link-dot {
+     display: block;
+     width: 4px;
+     height: 4px;
+     border-radius: 50%;
+     background: var(--fairy-teal);
+     box-shadow: 0 0 6px var(--fairy-teal);
+     transform: scale(0);
+     transition: transform 0.3s var(--ease-out);
+   }
+   
+   .hd__link:hover .hd__link-dot,
+   .hd__link--active .hd__link-dot {
+     transform: scale(1);
+   }
+   
+   /* ── RIGHT SIDE ── */
+   .hd__right {
+     display: flex;
+     align-items: center;
+     gap: 16px;
+   }
+   
+   /* Language selector */
+   .hd__lang {
+     display: flex;
+     align-items: center;
+     gap: 8px;
+     padding: 7px 14px;
+     border-radius: 100px;
+     border: 1px solid var(--glass-border);
+     background: var(--glass);
+     backdrop-filter: blur(8px);
+     transition: border-color 0.3s, background 0.3s;
+   }
+   
+   .hd__lang:hover {
+     border-color: rgba(46,207,180,0.3);
+     background: rgba(46,207,180,0.08);
+   }
+   
+   .hd__lang-icon {
+     width: 16px;
+     height: 16px;
+     color: var(--fairy-teal);
+     flex-shrink: 0;
+   }
+   
+   .hd__cursor {
+     display: flex;
+     align-items: center;
+     gap: 8px;
+     padding: 7px 14px;
+     border-radius: 100px;
+     border: 1px solid var(--glass-border);
+     background: var(--glass);
+     backdrop-filter: blur(8px);
+     transition: border-color 0.3s, background 0.3s;
+   }
+   
+   .hd___cursor:hover {
+     border-color: rgba(46,207,180,0.3);
+     background: rgba(46,207,180,0.08);
+   }
+   
+   .hd__cursor-icon {
+     width: 16px;
+     height: 16px;
+     color: var(--fairy-teal);
+     flex-shrink: 0;
+   }
+   
+   .hd__select {
+     background: transparent;
+     border: none;
+     outline: none;
+     color: rgba(240,255,254,0.85);
+     font-family: var(--font-display);
+     font-size: 11px;
+     letter-spacing: 1.5px;
+     cursor: pointer;
+     width: auto;
+   }
+   
+   .hd__select option {
+     background: #0d2535;
+     color: var(--fairy-white);
+   }
+   
+   /* ── HAMBURGER ── */
+   .hd__burger {
+     display: none;
+     flex-direction: column;
+     justify-content: center;
+     gap: 5px;
+     width: 38px;
+     height: 38px;
+     background: var(--glass);
+     border: 1px solid var(--glass-border);
+     border-radius: 10px;
+     padding: 8px;
+     cursor: pointer;
+     transition: border-color 0.3s, background 0.3s;
+   }
+   
+   .hd__burger:hover {
+     border-color: var(--fairy-teal);
+     background: rgba(46,207,180,0.1);
+   }
+   
+   .hd__burger span {
+     display: block;
+     height: 2px;
+     background: var(--fairy-white);
+     border-radius: 2px;
+     transition: all 0.35s var(--ease-out);
+     transform-origin: center;
+   }
+   
+   /* Burger → X animation */
+   .hd--open .hd__burger span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+   .hd--open .hd__burger span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+   .hd--open .hd__burger span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+   
+   /* ── MOBILE NAV ── */
+   .hd__mobile-nav {
+     display: none;
+     flex-direction: column;
+     gap: 0;
+     overflow: hidden;
+     max-height: 0;
+     transition: max-height 0.45s var(--ease-out), opacity 0.3s;
+     opacity: 0;
+     background: rgba(5,18,24,0.92);
+     backdrop-filter: blur(20px);
+     border-top: 1px solid var(--glass-border);
+   }
+   
+   .hd__mobile-nav--open {
+     max-height: 420px;
+     opacity: 1;
+   }
+   
+   .hd__mobile-link {
+     display: flex;
+     align-items: center;
+     gap: 14px;
+     padding: 18px 32px;
+     font-family: var(--font-display);
+     font-size: 13px;
+     letter-spacing: 2px;
+     color: rgba(240,255,254,0.75);
+     text-decoration: none;
+     border-bottom: 1px solid rgba(255,255,255,0.05);
+     transition: color 0.3s, background 0.3s, padding 0.3s;
+   }
+   
+   .hd__mobile-link:hover {
+     color: var(--fairy-teal);
+     background: rgba(46,207,180,0.06);
+     padding-left: 40px;
+   }
+   
+   .hd__mobile-gem {
+     font-size: 10px;
+     color: var(--fairy-teal);
+     filter: drop-shadow(0 0 4px var(--fairy-teal));
+     animation: gem-spin 6s linear infinite;
+     display: inline-block;
+   }
+   
+   @keyframes gem-spin {
+     from { transform: rotate(0deg) scale(1); }
+     50%  { transform: rotate(180deg) scale(1.4); }
+     to   { transform: rotate(360deg) scale(1); }
+   }
+   
+   /* ── RESPONSIVE ── */
+   @media (max-width: 900px) {
+     .hd__nav    { display: none; }
+     .hd__cursor { display: none; }
+     .hd__burger { display: flex; }
+     .hd__mobile-nav { display: flex; }
+     .hd__inner  { padding: 12px 24px; }
+   }
+   
+   @media (max-width: 480px) {
+     .hd__logo img { width: 90px; }
+     .hd__cursor { display: none; }
+   }
